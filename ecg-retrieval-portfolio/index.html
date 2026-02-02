@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ECG Retrieval System | Minor Project</title>
+  <meta name="description" content="Deep Learning-Based ECG Retrieval for Scalable Clinical Decision Support (PTB-XL, Siamese embeddings, FAISS)." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="nav">
+      <a class="brand" href="#top">ECG Retrieval</a>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#objectives">Objectives</a>
+        <a href="#method">Method</a>
+        <a href="#deployment">Deployment</a>
+        <a href="#references">References</a>
+        <a class="btn small" href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <section id="top" class="hero">
+      <p class="kicker">Minor Project (21BMP302L) — Review 1</p>
+      <h1>Deep Learning‑Based ECG Retrieval for Scalable Clinical Decision Support</h1>
+      <p class="sub">
+        Retrieval-focused clinical decision support: learn ECG embeddings and retrieve similar historical cases at scale using FAISS.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Team</h3>
+          <ul>
+            <li>R. Prathanyaasree — RA2311060010016</li>
+            <li>Vishal U — RA2311060010022</li>
+            <li>Varshika Rajesh — RA2311060010029</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Guide</h3>
+          <p>Dr. Snekhalatha U</p>
+        </div>
+        <div class="card">
+          <h3>Core stack</h3>
+          <p>PTB‑XL / MIT‑BIH • Siamese embeddings • Contrastive learning • FAISS similarity search</p>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <!-- Replace these links later -->
+        <a class="btn" href="#" target="_blank" rel="noreferrer">Project PPT (PDF)</a>
+        <a class="btn secondary" href="#" target="_blank" rel="noreferrer">GitHub Repo</a>
+        <a class="btn ghost" href="#contact">Email</a>
+      </div>
+
+      <p class="note">
+        Tip: Replace the buttons above with your real PDF/Repo links after you upload them.
+      </p>
+    </section>
+  </header>
+
+  <main class="container">
+    <section id="overview" class="section">
+      <h2>Overview</h2>
+      <p>
+        Electrocardiography (ECG) is a non‑invasive technique that records the heart’s electrical activity and helps detect abnormalities
+        such as arrhythmias, ischemia, and myocardial infarction.
+      </p>
+      <p>
+        This project focuses on deep learning‑based ECG <b>retrieval</b> (not only classification) to compare a patient’s ECG with historical cases,
+        enabling scalable and reliable clinical decision support.
+      </p>
+    </section>
+
+    <section id="objectives" class="section">
+      <h2>Aim & objectives</h2>
+      <p class="lead">
+        Aim: Design a deep learning‑based ECG retrieval system that enables scalable and accurate clinical decision support by retrieving
+        patient records with similar cardiac patterns.
+      </p>
+      <ul class="bullets">
+        <li>Preprocess and use benchmark datasets (e.g., PTB‑XL) to ensure high‑quality input for training and evaluation.</li>
+        <li>Implement deep neural networks (e.g., Siamese/embedding models) to learn robust ECG feature representations.</li>
+        <li>Use pairwise learning + contrastive loss to separate similar vs dissimilar ECG signals in embedding space.</li>
+        <li>Use FAISS (Facebook AI Similarity Search) for efficient large‑scale similarity retrieval.</li>
+        <li>Evaluate using retrieval metrics: Top‑k accuracy, precision, recall; benchmark vs classification baselines.</li>
+        <li>Ensure scalability/adaptability for real deployment in hospital/clinical databases.</li>
+      </ul>
+    </section>
+
+    <section id="method" class="section">
+      <h2>Methodology</h2>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Datasets</h3>
+          <ul class="bullets">
+            <li>PTB‑XL: large‑scale clinical ECG dataset (primary).</li>
+            <li>MIT‑BIH Arrhythmia Database: benchmark dataset for testing.</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3>Software & libraries</h3>
+          <ul class="bullets">
+            <li>Python</li>
+            <li>PyTorch / TensorFlow (deep learning)</li>
+            <li>FAISS (similarity search + indexing)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Retrieval pipeline (high level)</h3>
+        <ol class="steps">
+          <li>Ingest ECG signals and preprocess into a consistent format.</li>
+          <li>Train an embedding model (Siamese style) using contrastive/pairwise learning.</li>
+          <li>Store embeddings in a FAISS index for fast Approximate Nearest Neighbor search.</li>
+          <li>For a query ECG, compute its embedding and retrieve Top‑K similar cases.</li>
+        </ol>
+      </div>
+
+      <div class="panel">
+        <h3>Evaluation</h3>
+        <p>
+          We will evaluate retrieval performance using Top‑k accuracy, precision, and recall, and compare against classification baselines.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>Novelty (portfolio-ready wording)</h3>
+        <ul class="bullets">
+          <li>Moves beyond “label output” by emphasizing ECG‑to‑ECG retrieval for evidence-based decision support.</li>
+          <li>Combines representation learning (embeddings) with scalable similarity search (FAISS) for real-time applicability.</li>
+          <li>Targets deployable workflow (UI + API + indexing) rather than offline experiments only.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="deployment" class="section">
+      <h2>Deployment plan</h2>
+      <p>
+        Deployment matters because clinicians need interactive tools (not just research code), and telemedicine/remote monitoring benefits from
+        cloud-based retrieval systems.
+      </p>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Prototype UI</h3>
+          <ul class="bullets">
+            <li>Streamlit / Gradio for rapid demos and clinician trials.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Backend</h3>
+          <ul class="bullets">
+            <li>FastAPI backend + FAISS index for low-latency similarity retrieval.</li>
+            <li>Docker for portability and reproducibility.</li>
+            <li>Cloud hosting (Azure / AWS) for scalability; future EHR integration.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="references" class="section">
+      <h2>References & links</h2>
+      <ul class="links">
+        <li><a href="https://physionet.org/content/ptb-xl/1.0.3/" target="_blank" rel="noreferrer">PTB‑XL dataset (PhysioNet)</a></li>
+        <li><a href="https://pypi.org/project/wfdb/" target="_blank" rel="noreferrer">WFDB Python package</a></li>
+        <li><a href="https://arxiv.org/abs/1702.08734" target="_blank" rel="noreferrer">FAISS paper</a></li>
+        <li><a href="https://varshikarajeshbmi029vo1.my.canva.site/an-ecg-retrieval-system-using-deep-learning" target="_blank" rel="noreferrer">Existing portfolio link (Canva)</a></li>
+      </ul>
+      <p class="note">
+        If you want, we can add a short “Literature review highlights” section next (your PPT has a detailed table).
+      </p>
+    </section>
+
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <p>Add your team email(s) and GitHub repo link here.</p>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Email</h3>
+          <p>
+            <a href="mailto:YOURTEAMEMAIL@example.com">YOURTEAMEMAIL@example.com</a>
+          </p>
+        </div>
+        <div class="panel">
+          <h3>GitHub</h3>
+          <p>
+            <a href="https://github.com/YOUR_ORG_OR_USERNAME/YOUR_REPO" target="_blank" rel="noreferrer">
+              github.com/YOUR_ORG_OR_USERNAME/YOUR_REPO
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>© 2026 ECG Retrieval Minor Project Team</p>
+    </footer>
+  </main>
+</body>
+</html>
