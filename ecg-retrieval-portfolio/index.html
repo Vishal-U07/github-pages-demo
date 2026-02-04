@@ -3,30 +3,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ECG Retrieval System | Minor Project</title>
-  <meta name="description" content="Deep Learning-Based ECG Retrieval for Scalable Clinical Decision Support (PTB-XL, Siamese embeddings, FAISS)." />
+  <title>ECG Retrieval | Minor Project (21BMP302L)</title>
+  <meta name="description" content="Deep Learning-Based ECG Retrieval for Clinical Decision Support using PTB-XL, CNN embeddings, triplet loss, and FAISS." />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <header class="header">
     <nav class="nav">
       <a class="brand" href="#top">ECG Retrieval</a>
       <div class="nav-links">
         <a href="#overview">Overview</a>
-        <a href="#literature">Literature</a>
-        <a href="#objectives">Objectives</a>
-        <a href="#method">Method</a>
-        <a href="#deployment">Deployment</a>
+        <a href="#objectives">Aim</a>
+        <a href="#novelty">Novelty</a>
+        <a href="#dataset">Dataset</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#training">Training</a>
+        <a href="#evaluation">Evaluation</a>
+        <a href="#results">Results</a>
         <a href="#references">References</a>
         <a class="btn small" href="#contact">Contact</a>
       </div>
     </nav>
 
     <section id="top" class="hero">
-      <p class="kicker">Minor Project (21BMP302L) — Review 1</p>
-      <h1>Deep Learning‑Based ECG Retrieval for Scalable Clinical Decision Support</h1>
+      <p class="kicker">Minor Project (21BMP302L) — Review 2</p>
+      <h1>Deep Learning‑Based ECG Retrieval for Clinical Decision Support</h1>
       <p class="sub">
-        Retrieval-focused clinical decision support: learn ECG embeddings and retrieve similar historical cases at scale using FAISS.
+        We retrieve clinically similar ECG cases (instead of only predicting a label) using deep metric learning (triplet loss) and fast FAISS indexing.
       </p>
 
       <div class="cards">
@@ -39,12 +44,12 @@
           </ul>
         </div>
         <div class="card">
-          <h3>Guide</h3>
+          <h3>Project Guide</h3>
           <p>Dr. Snekhalatha U</p>
         </div>
         <div class="card">
           <h3>Core stack</h3>
-          <p>PTB‑XL / MIT‑BIH • Siamese embeddings • Contrastive learning • FAISS similarity search</p>
+          <p>PTB‑XL (12‑lead) • 1D CNN embeddings (128‑D) • Triplet margin loss (m=1.0) • FAISS similarity search</p>
         </div>
       </div>
 
@@ -57,136 +62,357 @@
   </header>
 
   <main class="container">
-    <section id="overview" class="section">
-      <h2>Overview</h2>
-      <p>
-        Electrocardiography (ECG) is a non‑invasive technique that records the heart's electrical activity and helps detect abnormalities
-        such as arrhythmias, ischemia, and myocardial infarction.
-      </p>
-      <p>
-        This project focuses on deep learning‑based ECG <b>retrieval</b> (not only classification) to compare a patient's ECG with historical cases,
-        enabling scalable and reliable clinical decision support.
-      </p>
-    </section>
 
-    <section id="literature" class="section">
-      <h2>Literature review highlights</h2>
-      <div class="grid-2">
-        <div class="panel">
-          <h3>Existing work</h3>
-          <ul class="bullets">
-            <li>Foundation Models for ECG (2025): Large FM with embeddings, but no retrieval stack or ANN indexing.</li>
-            <li>HeartBERT (2024): Transformer pretraining, no scalable similarity search.</li>
-            <li>PCLR (2022): Patient contrastive learning, no full retrieval pipeline.</li>
-            <li>CLOCS (2021): Self-supervised pretraining, no end-to-end retrieval system.</li>
-          </ul>
-        </div>
-        <div class="panel">
-          <h3>Our gap-filling</h3>
-          <ul class="bullets">
-            <li>ECG-to-ECG retrieval (not just classification).</li>
-            <li>FAISS for scalable similarity search.</li>
-            <li>Deployable workflow for clinical use.</li>
-            <li>Contrastive learning + embeddings for richer representations.</li>
-          </ul>
-        </div>
-      </div>
+    <section id="overview" class="section">
+      <h2>Introduction</h2>
+      <p>
+        Electrocardiography (ECG) is a non-invasive technique that records the heart’s electrical activity to detect abnormalities such as
+        arrhythmias, ischemia, and myocardial infarction, and is widely used in hospitals and clinics.
+      </p>
+      <p>
+        This project focuses on deep learning-based ECG <b>retrieval</b> rather than simple classification: a query ECG is compared with historical
+        cases to support scalable and reliable clinical decision support and improve diagnostic efficiency and accuracy.
+      </p>
     </section>
 
     <section id="objectives" class="section">
       <h2>Aim & objectives</h2>
       <p class="lead">
-        Aim: Design a deep learning‑based ECG retrieval system that enables scalable and accurate clinical decision support by retrieving
-        patient records with similar cardiac patterns.
+        Aim: To design and develop an ECG retrieval system using deep learning for clinical decision support.
       </p>
       <ul class="bullets">
-        <li>Preprocess and use benchmark datasets (e.g., PTB‑XL) to ensure high‑quality input for training and evaluation.</li>
-        <li>Implement deep neural networks (e.g., Siamese/embedding models) to learn robust ECG feature representations.</li>
-        <li>Use pairwise learning + contrastive loss to separate similar vs dissimilar ECG signals in embedding space.</li>
-        <li>Use FAISS (Facebook AI Similarity Search) for efficient large‑scale similarity retrieval.</li>
-        <li>Evaluate using retrieval metrics: Top‑k accuracy, precision, recall; benchmark vs classification baselines.</li>
-        <li>Ensure scalability/adaptability for real deployment in hospital/clinical databases.</li>
+        <li>Preprocess and utilize benchmark ECG datasets (e.g., PTB‑XL) for reliable model training and evaluation.</li>
+        <li>Develop deep metric learning models (Triplet Loss) for robust ECG feature representations.</li>
+        <li>Implement similarity learning to distinguish similar vs dissimilar ECG signals.</li>
+        <li>Enable fast large-scale ECG retrieval using FAISS indexing.</li>
+        <li>Evaluate using retrieval metrics such as Top‑K accuracy, precision, and recall.</li>
+        <li>Design a scalable framework suitable for real-world clinical and hospital database deployment.</li>
       </ul>
     </section>
 
-    <section id="method" class="section">
-      <h2>Methodology</h2>
+    <section id="literature" class="section">
+      <h2>Literature review (selected)</h2>
+      <table class="lit-table">
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Title</th>
+            <th>Venue (Year)</th>
+            <th>Key merit</th>
+            <th>Gap vs our model</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Foundation Models for Generalizable ECG Interpretation</td>
+            <td>medRxiv (2025)</td>
+            <td>Large multi-center foundation model with embeddings.</td>
+            <td>No explicit ECG-to-ECG retrieval stack; limited retrieval benchmarking and ANN indexing.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>HeartBERT: A Self-Supervised ECG Embedding Model</td>
+            <td>arXiv (2024)</td>
+            <td>Transformer pretraining for contextual ECG embeddings.</td>
+            <td>No scalable similarity search or patient-level retrieval evaluation.</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>PCLR: Patient Contrastive Learning of Representations</td>
+            <td>PLOS Comput. Biol. (2022)</td>
+            <td>Patient-aware contrastive learning improves representations.</td>
+            <td>No full retrieval pipeline or FAISS-style indexing at scale.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>CLOCS: Contrastive Learning of Cardiac Signals Across Space, Time & Patients</td>
+            <td>ICML (2021)</td>
+            <td>Self-supervised ECG pretraining improves downstream tasks.</td>
+            <td>No end-to-end clinical retrieval system or database-scale search.</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>CROCS: Clustering and Retrieval of Cardiac Signals</td>
+            <td>NeurIPS (2021)</td>
+            <td>Supervised contrastive prototypes for clustering/retrieval by attributes.</td>
+            <td>Does not show scalable approximate search or multi-modal queries.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="novelty" class="section">
+      <h2>Novelty</h2>
+      <ul class="bullets">
+        <li>Targets retrieval for decision support rather than only classification outputs.</li>
+        <li>Addresses scalability using FAISS for efficient similarity search over large ECG databases.</li>
+        <li>Emphasizes representation learning using deep neural networks for richer ECG embeddings.</li>
+        <li>Aims at real-time clinical applicability with faster query response.</li>
+        <li>Supports case-based medical decision making by returning similar historical ECG cases.</li>
+        <li>Direct large-scale ECG-to-ECG similarity retrieval remains limited; this work addresses that gap.</li>
+      </ul>
+    </section>
+
+    <section id="dataset" class="section">
+      <h2>Dataset description (PTB‑XL)</h2>
 
       <div class="grid-2">
         <div class="panel">
-          <h3>Datasets</h3>
+          <h3>Recording details</h3>
           <ul class="bullets">
-            <li>PTB‑XL: large‑scale clinical ECG dataset (primary).</li>
-            <li>MIT‑BIH Arrhythmia Database: benchmark dataset for testing.</li>
+            <li>Type: Clinical 12‑lead ECG recordings</li>
+            <li>Signal length: 10 seconds per record</li>
+            <li>Sampling rate: 500 Hz (≈5000 samples per lead)</li>
+            <li>Format: Multichannel time-series ECG signals</li>
           </ul>
         </div>
 
         <div class="panel">
-          <h3>Software & libraries</h3>
+          <h3>Data utilization</h3>
           <ul class="bullets">
-            <li>Python</li>
-            <li>PyTorch / TensorFlow (deep learning)</li>
-            <li>FAISS (similarity search + indexing)</li>
+            <li>Total ECG records: ~21,800 recordings</li>
+            <li>Number of subjects: ~18,800 patients</li>
+            <li>Annotation type: Diagnostic ECG labels</li>
+            <li>Task type: ECG similarity retrieval</li>
           </ul>
         </div>
       </div>
 
       <div class="panel">
-        <h3>Retrieval pipeline</h3>
-        <ol class="steps">
-          <li>Ingest ECG signals and preprocess into a consistent format.</li>
-          <li>Train an embedding model (Siamese style) using contrastive/pairwise learning.</li>
-          <li>Store embeddings in a FAISS index for fast Approximate Nearest Neighbor search.</li>
-          <li>For a query ECG, compute its embedding and retrieve Top‑K similar cases.</li>
-        </ol>
+        <h3>Data split</h3>
+        <table class="timeline-table">
+          <thead>
+            <tr><th>Split</th><th>Percentage</th><th>Sample count</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Training</td><td>~70%</td><td>17,418</td><td>Learning ECG embeddings</td></tr>
+            <tr><td>Validation</td><td>~15%</td><td>2,182</td><td>Model tuning and monitoring</td></tr>
+            <tr><td>Test</td><td>~15%</td><td>2,198</td><td>Final retrieval evaluation</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Label description</h3>
+          <ul class="bullets">
+            <li>Label type: Diagnostic classes</li>
+            <li>Label source: Expert-annotated ECG diagnoses</li>
+            <li>Usage: Forms positive/negative pairs for triplet loss</li>
+            <li>Format: Multi-label grouped into diagnostic categories</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Data components</h3>
+          <ul class="bullets">
+            <li>Input shape: (12 × 5000)</li>
+            <li>Windowing: Fixed-length ECG segments</li>
+            <li>Normalization: Applied per signal</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="section">
+      <h2>Workflow: ECG retrieval pipeline</h2>
+
+      <div class="panel">
+        <h3>Block A — Data input & preprocessing</h3>
+        <p>
+          Raw 12‑lead ECG signals are loaded from PTB‑XL, cleaned to reduce noise/inconsistencies, standardized using Z‑score normalization,
+          and lightly augmented (scaling, small time shifts) to improve robustness.
+        </p>
       </div>
 
       <div class="panel">
-        <h3>Evaluation</h3>
+        <h3>Block B — Segmentation & feature learning</h3>
         <p>
-          Evaluate retrieval performance using Top‑k accuracy, precision, and recall, and compare against classification baselines.
+          Signals are divided into fixed 10‑second overlapping sliding windows. A 1D CNN embedding network extracts waveform features and
+          converts each segment into a compact 128‑dimensional embedding vector.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>Block C — Similarity search & metric learning</h3>
+        <p>
+          Triplet loss learns meaningful similarity: embeddings of similar ECGs are pulled closer while dissimilar ECGs are pushed apart.
+          FAISS enables fast large-scale nearest-neighbour similarity search to retrieve the most similar ECG signals from the database.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>Block D — Diagnosis aggregation & output</h3>
+        <p>
+          Top‑K similar ECGs are collected, and their diagnosis labels are analyzed to identify dominant patterns. The system outputs similar
+          past ECG cases rather than a direct diagnosis to support clinical decision making.
         </p>
       </div>
     </section>
 
-    <section id="deployment" class="section">
-      <h2>Deployment plan</h2>
-      <p>
-        Real-time ECG retrieval supports faster, evidence-based clinical decisions. Deployment ensures repeatability, accessibility,
-        and transparency in real workflows.
-      </p>
+    <section id="architecture" class="section">
+      <h2>Model architecture (ECGEmbeddingNet)</h2>
 
       <div class="grid-2">
         <div class="panel">
-          <h3>Prototype UI</h3>
+          <h3>Core design</h3>
           <ul class="bullets">
-            <li>Streamlit / Gradio for rapid demos and clinician trials.</li>
+            <li>Model type: CNN-based ECG embedding network</li>
+            <li>Input: 12‑lead ECG signal</li>
+            <li>Input size: (12 × 5000) (10 seconds @ 500 Hz)</li>
+            <li>Feature extractor: Convolutional layers (temporal features) + temporal pooling</li>
+            <li>Activation: ELU / ReLU</li>
+            <li>Normalization: Batch normalization</li>
           </ul>
         </div>
         <div class="panel">
-          <h3>Backend & infrastructure</h3>
+          <h3>Embedding & similarity</h3>
           <ul class="bullets">
-            <li>FastAPI backend + FAISS index for low-latency retrieval.</li>
-            <li>Docker containerization for portability.</li>
-            <li>Azure/AWS hosting for scalability; future EHR integration.</li>
+            <li>Embedding layer: Fully connected</li>
+            <li>Embedding dimension: 128</li>
+            <li>Embedding normalization: L2 normalization (unit vector)</li>
+            <li>Similarity: Euclidean / cosine distance</li>
+            <li>Objective: Triplet margin loss (margin = 1.0)</li>
+            <li>Task: ECG similarity retrieval</li>
           </ul>
         </div>
       </div>
     </section>
 
+    <section id="training" class="section">
+      <h2>Training hyperparameters</h2>
+      <table class="timeline-table">
+        <thead>
+          <tr><th>Category</th><th>Hyperparameter</th><th>Value / setting</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Model</td><td>Architecture</td><td>ECGEmbeddingNet</td></tr>
+          <tr><td>Model</td><td>Input type</td><td>ECG signal segments</td></tr>
+          <tr><td>Model</td><td>Embedding dimension</td><td>128</td></tr>
+          <tr><td>Training</td><td>Device</td><td>GPU (CUDA) / CPU</td></tr>
+          <tr><td>Training</td><td>Epochs</td><td>10</td></tr>
+          <tr><td>Optimizer</td><td>Type</td><td>Adam</td></tr>
+          <tr><td>Optimizer</td><td>Learning rate</td><td>0.001</td></tr>
+          <tr><td>Optimizer</td><td>Weight decay</td><td>Not used</td></tr>
+          <tr><td>Loss</td><td>Loss type</td><td>Triplet margin loss</td></tr>
+          <tr><td>Loss</td><td>Margin</td><td>1</td></tr>
+          <tr><td>Data loading</td><td>Batch size</td><td>32</td></tr>
+          <tr><td>Data loading</td><td>Training shuffle</td><td>Yes</td></tr>
+          <tr><td>Data loading</td><td>Validation shuffle</td><td>No</td></tr>
+          <tr><td>Sampling</td><td>Triplet sampling</td><td>Online triplet mining</td></tr>
+          <tr><td>Regularization</td><td>Dropout</td><td>Not used</td></tr>
+          <tr><td>Training</td><td>LR scheduler</td><td>Not used</td></tr>
+          <tr><td>Training</td><td>Early stopping</td><td>Not used</td></tr>
+          <tr><td>Training</td><td>Mixed precision</td><td>Not used</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="evaluation" class="section">
+      <h2>Evaluation & validation</h2>
+      <table class="timeline-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Type</th>
+            <th>What it evaluates</th>
+            <th>Observed result</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Triplet loss</td>
+            <td>Training</td>
+            <td>Embedding separation</td>
+            <td>0.66 → 0.49</td>
+            <td>Stable learning</td>
+          </tr>
+          <tr>
+            <td>Recall@1</td>
+            <td>Retrieval</td>
+            <td>Top‑1 accuracy</td>
+            <td>High</td>
+            <td>Correct ECG often ranked first</td>
+          </tr>
+          <tr>
+            <td>Recall@5</td>
+            <td>Retrieval</td>
+            <td>Top‑5 accuracy</td>
+            <td>0.971</td>
+            <td>Correct ECG almost always retrieved</td>
+          </tr>
+          <tr>
+            <td>Recall@5 (ablation)</td>
+            <td>Retrieval</td>
+            <td>Without hard negatives</td>
+            <td>0.936</td>
+            <td>~3.5% performance drop</td>
+          </tr>
+          <tr>
+            <td>MRR</td>
+            <td>Retrieval</td>
+            <td>Ranking quality</td>
+            <td>High</td>
+            <td>Early correct matches</td>
+          </tr>
+          <tr>
+            <td>Embedding distance</td>
+            <td>Similarity</td>
+            <td>ECG similarity</td>
+            <td>Well separated</td>
+            <td>Discriminative embeddings</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="panel">
+        <h3>Training convergence</h3>
+        <p>
+          Triplet loss decreases over epochs (approximately 0.66 down to ~0.50 by epoch 10), indicating effective learning and embedding-space optimization.
+        </p>
+      </div>
+    </section>
+
+    <section id="results" class="section">
+      <h2>Results, deployment & interface</h2>
+      <div class="panel">
+        <h3>Clinical similarity retrieval</h3>
+        <p>
+          A query ECG compared with the top retrieved ECG shows similar waveform morphology, indicating the system successfully identifies clinically similar patterns.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>Interface (testing with a test case)</h3>
+        <ul class="bullets">
+          <li>Adjust number of similar results (Top‑K) and visualize a selected lead (e.g., Lead II).</li>
+          <li>Optionally apply a bandpass filter during testing.</li>
+          <li>System info shown: embedding dimension 128 and input shape (example test file: 12 × 1000).</li>
+          <li>Similarity results include rank, distance, patient ID, index, and retrieved labels (e.g., normal ECG, sinus rhythm).</li>
+        </ul>
+      </div>
+    </section>
+
     <section id="references" class="section">
-      <h2>References & links</h2>
+      <h2>References & portfolio link</h2>
       <ul class="links">
-        <li><a href="https://physionet.org/content/ptb-xl/1.0.3/" target="_blank" rel="noreferrer">PTB‑XL dataset (PhysioNet)</a></li>
+        <li><a href="https://physionet.org/content/ptb-xl/1.0.3/" target="_blank" rel="noreferrer">PTB‑XL dataset</a></li>
         <li><a href="https://pypi.org/project/wfdb/" target="_blank" rel="noreferrer">WFDB Python package</a></li>
-        <li><a href="https://arxiv.org/abs/1702.08734" target="_blank" rel="noreferrer">FAISS paper</a></li>
-        <li><a href="https://varshikarajeshbmi029vo1.my.canva.site/an-ecg-retrieval-system-using-deep-learning" target="_blank" rel="noreferrer">Existing portfolio link (Canva)</a></li>
+        <li><a href="https://ieeexplore.ieee.org/document/4122029" target="_blank" rel="noreferrer">Pan & Tompkins (1985): Real‑time QRS detection</a></li>
+        <li><a href="https://arxiv.org/abs/1503.03832" target="_blank" rel="noreferrer">FaceNet (2015): Triplet loss</a></li>
+        <li><a href="https://arxiv.org/abs/2002.05709" target="_blank" rel="noreferrer">SimCLR (2020): Contrastive learning</a></li>
+        <li><a href="https://arxiv.org/abs/1702.08734" target="_blank" rel="noreferrer">FAISS (Johnson et al., 2019)</a></li>
+        <li><a href="https://www.cs.cornell.edu/courses/cs4300/2012fa/lectures/lec11-ir-eval.pdf" target="_blank" rel="noreferrer">mAP & Recall@K (IR evaluation)</a></li>
+        <li><a href="https://jmlr.org/papers/v9/vandermaaten08a.html" target="_blank" rel="noreferrer">t‑SNE (2008)</a></li>
+        <li><a href="https://arxiv.org/abs/1802.03426" target="_blank" rel="noreferrer">UMAP (2018)</a></li>
+        <li><a href="https://varshikarajeshbmi029vo1.my.canva.site/an-ecg-retrieval-system-using-deep-learning" target="_blank" rel="noreferrer">Portfolio link</a></li>
       </ul>
     </section>
 
     <section id="contact" class="section">
       <h2>Contact</h2>
-      <div class="grid-2">
+      <div class="grid-3">
         <div class="panel">
           <h3>R. Prathanyaasree</h3>
           <p><a href="mailto:pr1150@srmist.edu.in">pr1150@srmist.edu.in</a></p>
@@ -199,15 +425,11 @@
           <h3>Varshika Rajesh</h3>
           <p><a href="mailto:vs8418@srmist.edu.in">vs8418@srmist.edu.in</a></p>
         </div>
-        <div class="panel">
-          <h3>Guide</h3>
-          <p>Dr. Snekhalatha U</p>
-        </div>
       </div>
     </section>
 
     <footer class="footer">
-      <p>© 2026 ECG Retrieval Minor Project Team</p>
+      <p>© 2026 ECG Retrieval Minor Project Team | SRMIST</p>
     </footer>
   </main>
 </body>
