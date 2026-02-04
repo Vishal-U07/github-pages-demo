@@ -13,6 +13,7 @@
       <a class="brand" href="#top">ECG Retrieval</a>
       <div class="nav-links">
         <a href="#overview">Overview</a>
+        <a href="#literature">Literature</a>
         <a href="#objectives">Objectives</a>
         <a href="#method">Method</a>
         <a href="#deployment">Deployment</a>
@@ -48,15 +49,10 @@
       </div>
 
       <div class="cta-row">
-        <!-- Replace these links later -->
         <a class="btn" href="#" target="_blank" rel="noreferrer">Project PPT (PDF)</a>
-        <a class="btn secondary" href="#" target="_blank" rel="noreferrer">GitHub Repo</a>
+        <a class="btn secondary" href="#" target="_blank" rel="noreferrer">Demo</a>
         <a class="btn ghost" href="#contact">Email</a>
       </div>
-
-      <p class="note">
-        Tip: Replace the buttons above with your real PDF/Repo links after you upload them.
-      </p>
     </section>
   </header>
 
@@ -64,13 +60,37 @@
     <section id="overview" class="section">
       <h2>Overview</h2>
       <p>
-        Electrocardiography (ECG) is a non‑invasive technique that records the heart’s electrical activity and helps detect abnormalities
+        Electrocardiography (ECG) is a non‑invasive technique that records the heart's electrical activity and helps detect abnormalities
         such as arrhythmias, ischemia, and myocardial infarction.
       </p>
       <p>
-        This project focuses on deep learning‑based ECG <b>retrieval</b> (not only classification) to compare a patient’s ECG with historical cases,
+        This project focuses on deep learning‑based ECG <b>retrieval</b> (not only classification) to compare a patient's ECG with historical cases,
         enabling scalable and reliable clinical decision support.
       </p>
+    </section>
+
+    <section id="literature" class="section">
+      <h2>Literature review highlights</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Existing work</h3>
+          <ul class="bullets">
+            <li>Foundation Models for ECG (2025): Large FM with embeddings, but no retrieval stack or ANN indexing.</li>
+            <li>HeartBERT (2024): Transformer pretraining, no scalable similarity search.</li>
+            <li>PCLR (2022): Patient contrastive learning, no full retrieval pipeline.</li>
+            <li>CLOCS (2021): Self-supervised pretraining, no end-to-end retrieval system.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Our gap-filling</h3>
+          <ul class="bullets">
+            <li>ECG-to-ECG retrieval (not just classification).</li>
+            <li>FAISS for scalable similarity search.</li>
+            <li>Deployable workflow for clinical use.</li>
+            <li>Contrastive learning + embeddings for richer representations.</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <section id="objectives" class="section">
@@ -112,7 +132,7 @@
       </div>
 
       <div class="panel">
-        <h3>Retrieval pipeline (high level)</h3>
+        <h3>Retrieval pipeline</h3>
         <ol class="steps">
           <li>Ingest ECG signals and preprocess into a consistent format.</li>
           <li>Train an embedding model (Siamese style) using contrastive/pairwise learning.</li>
@@ -124,25 +144,16 @@
       <div class="panel">
         <h3>Evaluation</h3>
         <p>
-          We will evaluate retrieval performance using Top‑k accuracy, precision, and recall, and compare against classification baselines.
+          Evaluate retrieval performance using Top‑k accuracy, precision, and recall, and compare against classification baselines.
         </p>
-      </div>
-
-      <div class="panel">
-        <h3>Novelty (portfolio-ready wording)</h3>
-        <ul class="bullets">
-          <li>Moves beyond “label output” by emphasizing ECG‑to‑ECG retrieval for evidence-based decision support.</li>
-          <li>Combines representation learning (embeddings) with scalable similarity search (FAISS) for real-time applicability.</li>
-          <li>Targets deployable workflow (UI + API + indexing) rather than offline experiments only.</li>
-        </ul>
       </div>
     </section>
 
     <section id="deployment" class="section">
       <h2>Deployment plan</h2>
       <p>
-        Deployment matters because clinicians need interactive tools (not just research code), and telemedicine/remote monitoring benefits from
-        cloud-based retrieval systems.
+        Real-time ECG retrieval supports faster, evidence-based clinical decisions. Deployment ensures repeatability, accessibility,
+        and transparency in real workflows.
       </p>
 
       <div class="grid-2">
@@ -153,11 +164,11 @@
           </ul>
         </div>
         <div class="panel">
-          <h3>Backend</h3>
+          <h3>Backend & infrastructure</h3>
           <ul class="bullets">
-            <li>FastAPI backend + FAISS index for low-latency similarity retrieval.</li>
-            <li>Docker for portability and reproducibility.</li>
-            <li>Cloud hosting (Azure / AWS) for scalability; future EHR integration.</li>
+            <li>FastAPI backend + FAISS index for low-latency retrieval.</li>
+            <li>Docker containerization for portability.</li>
+            <li>Azure/AWS hosting for scalability; future EHR integration.</li>
           </ul>
         </div>
       </div>
@@ -171,28 +182,26 @@
         <li><a href="https://arxiv.org/abs/1702.08734" target="_blank" rel="noreferrer">FAISS paper</a></li>
         <li><a href="https://varshikarajeshbmi029vo1.my.canva.site/an-ecg-retrieval-system-using-deep-learning" target="_blank" rel="noreferrer">Existing portfolio link (Canva)</a></li>
       </ul>
-      <p class="note">
-        If you want, we can add a short “Literature review highlights” section next (your PPT has a detailed table).
-      </p>
     </section>
 
     <section id="contact" class="section">
       <h2>Contact</h2>
-      <p>Add your team email(s) and GitHub repo link here.</p>
       <div class="grid-2">
         <div class="panel">
-          <h3>Email</h3>
-          <p>
-            <a href="mailto:YOURTEAMEMAIL@example.com">YOURTEAMEMAIL@example.com</a>
-          </p>
+          <h3>R. Prathanyaasree</h3>
+          <p><a href="mailto:pr1150@srmist.edu.in">pr1150@srmist.edu.in</a></p>
         </div>
         <div class="panel">
-          <h3>GitHub</h3>
-          <p>
-            <a href="https://github.com/YOUR_ORG_OR_USERNAME/YOUR_REPO" target="_blank" rel="noreferrer">
-              github.com/YOUR_ORG_OR_USERNAME/YOUR_REPO
-            </a>
-          </p>
+          <h3>Vishal U</h3>
+          <p><a href="mailto:vu6927@srmist.edu.in">vu6927@srmist.edu.in</a></p>
+        </div>
+        <div class="panel">
+          <h3>Varshika Rajesh</h3>
+          <p><a href="mailto:vs8418@srmist.edu.in">vs8418@srmist.edu.in</a></p>
+        </div>
+        <div class="panel">
+          <h3>Guide</h3>
+          <p>Dr. Snekhalatha U</p>
         </div>
       </div>
     </section>
