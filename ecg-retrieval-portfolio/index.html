@@ -163,7 +163,7 @@
           <ul class="bullets">
             <li>Type: Clinical 12‑lead ECG recordings</li>
             <li>Signal length: 10 seconds per record</li>
-            <li>Sampling rate: 500 Hz (≈5000 samples per lead)</li>
+            <li>Sampling rate: 100 Hz (≈1000 samples per lead)</li>
             <li>Format: Multichannel time-series ECG signals</li>
           </ul>
         </div>
@@ -206,7 +206,7 @@
         <div class="panel">
           <h3>Data components</h3>
           <ul class="bullets">
-            <li>Input shape: (12 × 5000)</li>
+            <li>Input shape: (12 × 1000)</li>
             <li>Windowing: Fixed-length ECG segments</li>
             <li>Normalization: Applied per signal</li>
           </ul>
@@ -259,7 +259,7 @@
           <ul class="bullets">
             <li>Model type: CNN-based ECG embedding network</li>
             <li>Input: 12‑lead ECG signal</li>
-            <li>Input size: (12 × 5000) (10 seconds @ 500 Hz)</li>
+            <li>Input size: (12 × 1000) (10 seconds @ 100 Hz)</li>
             <li>Feature extractor: Convolutional layers (temporal features) + temporal pooling</li>
             <li>Activation: ELU / ReLU</li>
             <li>Normalization: Batch normalization</li>
@@ -434,3 +434,4 @@
   </main>
 </body>
 </html>
+
